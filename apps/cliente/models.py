@@ -3,6 +3,13 @@ from django.db import models
 # Create your models here.
 
 class Cliente(models.Model):
+    GENERO_OPCIONES_ZONA = (
+        ('norte', 'Norte'),
+        ('sur', 'Sur'),
+        ('este', 'Este'),
+        ('oeste', 'Oeste'),
+    )
+
     cuil = models.CharField(max_length=11, unique=True)
     nombre = models.CharField(max_length=200)
     domCalle = models.CharField(max_length=100)
@@ -10,9 +17,9 @@ class Cliente(models.Model):
     domBarrio = models.CharField(max_length=100)
     domLocalidad = models.CharField(max_length=100)
     domObservacion = models.CharField(max_length=200)
-    domCodZona = models.CharField(max_length=5)
+    domCodZona = models.CharField(max_length=9, choices=GENERO_OPCIONES_ZONA)
     telefono = models.CharField(max_length=12, unique=True)
-    
+
     creado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
 
