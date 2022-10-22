@@ -1,10 +1,8 @@
 from django.db import models
 
-from TP4RotiseriaElMejorSabor.apps.cliente.models import Cliente
-from TP4RotiseriaElMejorSabor.apps.empleado.models import Cadete
+from apps.cliente.models import Cliente
+from apps.empleado.models import Cadete
 
-
-# Create your models here.
 
 class Plato(models.Model):
     TIPO_PLATO_OPCIONES = (
