@@ -1,4 +1,3 @@
-from unittest.util import _MAX_LENGTH
 from django.db import models
 
 class Domicilio(models.Model):
@@ -7,7 +6,7 @@ class Domicilio(models.Model):
     domBarrio = models.CharField(max_length=100)
     domLocalidad = models.CharField(max_length=100)
     domObservacion = models.CharField(max_length=200)
-    domZona = models.CharField(DomZona, on_delete=models.CASCADE)
+    domZona = models.ForeignKey(DomZona, on_delete=models.CASCADE)
 
     def __str__(self):
        impresion = "{0} - {1} - {2} - {3} - {4} - {5} - {6}"
@@ -23,7 +22,7 @@ class Cliente(models.Model):
     cuil = models.CharField(max_length=11, unique=True)
     apellido = models.CharField(max_length=200)
     nombre = models.CharField(max_length=200)
-    domicilio = models.CharField(Domicilio, on_delete=models.CASCADE)
+    domicilio = models.ForeignKey(Domicilio, on_delete=models.CASCADE)
     telefono = models.CharField(max_length=12, unique=True)
     creado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
