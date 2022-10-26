@@ -1,5 +1,6 @@
 from django.urls import path
+from .views import cliente
 
 urlpatterns = [
-    path('', ),
+    path('', cliente, name='admin-cliente'),
 ]

@@ -18,3 +18,6 @@ def cliente_detalle(request, pk):
     return render(request,
                   'cliente/clientes.html',
                   {'cliente': cliente})
+
+def cliente(request):
+    return HttpResponse('Hola mundo!')
