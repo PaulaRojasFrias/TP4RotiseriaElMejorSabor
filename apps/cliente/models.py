@@ -1,29 +1,37 @@
+from unittest.util import _MAX_LENGTH
 from django.db import models
 
-class Cliente(models.Model):
-   OPCIONES_ZONA = (
-        ('norte', 'Norte'),
-        ('sur', 'Sur'),
-        ('este', 'Este'),
-        ('oeste', 'Oeste'),
-    )
-
-    cuil = models.CharField(max_length=11, unique=True)
-    nombre = models.CharField(max_length=200)
+class Domicilio(models.Model):
     domCalle = models.CharField(max_length=100)
-    domNumero = models.CharField(max_length=4, unique=True)
+    domNumero = models.BigIntegerField(blank=true)
     domBarrio = models.CharField(max_length=100)
     domLocalidad = models.CharField(max_length=100)
     domObservacion = models.CharField(max_length=200)
-    domCodZona = models.CharField(max_length=9, choices= OPCIONES_ZONA)
-    telefono = models.CharField(max_length=12, unique=True)
+    domZona = models.CharField(DomZona, on_delete=models.CASCADE)
 
+    def __str__(self):
+       impresion = "{0} - {1} - {2} - {3} - {4} - {5} - {6}"
+       return impresion.format(self.domCalle, self.domNumero, self.domBarrio, self.domLocalidad, self.domObservacion, self.domZona) 
+
+class DomZona(models.Model):
+    descripcionZona = models.CharField(max_length=10)
+
+    def __str__(self):
+        return '{}'.format(self.descripcionZona)
+
+class Cliente(models.Model):
+    cuil = models.CharField(max_length=11, unique=True)
+    apellido = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=200)
+    domicilio = models.CharField(Domicilio, on_delete=models.CASCADE)
+    telefono = models.CharField(max_length=12, unique=True)
     creado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
 
 
-    class Meta:
-        ordering = ('nombre',)
+class Meta:
+    ordering = ('nombre',)
 
-    def __str__(self):
-        return '{}'.format(self.nombre)
+def __str__(self):
+    impresion = "{0} - {1} - {2} - {3} - {4} - {5} - {6}"
+    return impresion.format(self.cuil, self.apellido, self.nombre, self.fecha_nacimiento, self.telefono, self.domicilio)
