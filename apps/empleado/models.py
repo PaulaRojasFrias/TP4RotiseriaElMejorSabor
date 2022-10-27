@@ -2,7 +2,7 @@ from django.db import models
 
 class Domicilio(models.Model):
     domCalle = models.CharField(max_length=100)
-    domNumero = models.BigIntegerField(blank=true)
+    domNumero = models.BigIntegerField(blank=True)
     domDepartamento = models.CharField(max_length=100)
     domLocalidad = models.CharField(max_length=100)
 
